@@ -1,0 +1,33 @@
+.mainPage {
+  background: red;
+}
+.books {
+  &.booksGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    grid-gap: 24px 21.5px;
+    justify-items: center;
+    @media (max-width: 1000px) {
+      grid-gap: 32px 35px;
+    }
+    @media (max-width: 620px) {
+      grid-gap: 16px;
+    }
+  }
+  &.booksList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.listItem {
+  background: #fff;
+
+  .booksGrid & {
+    width: 190px;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+}
