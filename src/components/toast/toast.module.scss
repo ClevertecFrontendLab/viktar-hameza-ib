@@ -1,0 +1,53 @@
+.toast {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px;
+  z-index: 9;
+  @media (max-width: 600px) {
+    top: 54px;
+  }
+}
+.info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 32px;
+  background: #feebea;
+  border: 1.5px solid #f42c4f;
+  border-radius: 5px;
+  @media (max-width: 1000px) {
+    padding: 16px 24px;
+    gap: 12px;
+  }
+  @media (max-width: 600px) {
+    align-items: start;
+    padding: 12px 16px;
+  }
+}
+.text {
+  flex: 1;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  @media (max-width: 1000px) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+.close {
+  background-color: transparent;
+  border: transparent;
+  img {
+    @media (max-width: 1000px) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+.iconInfo {
+  @media (max-width: 1000px) {
+    width: 24px;
+    height: 24px;
+  }
+}
