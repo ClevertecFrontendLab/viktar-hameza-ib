@@ -4,8 +4,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // https://jsonplaceholder.typicode.com/posts
 const initialState = {
   categories: [],
-  loading: 'idle',
-  error: null,
+  categoriesLoading: false,
+  categoriesError: null,
 };
 
 export const getCategories = createAsyncThunk(
@@ -21,7 +21,7 @@ export const getCategories = createAsyncThunk(
     condition: (_, { getState }) => {
       const { categories } = getState();
 
-      if (categories.loading === 'loading') return false;
+      if (categories.categoriesLoading) return false;
     },
   }
 );
@@ -34,17 +34,17 @@ export const categoriesSlice = createSlice({
     builder
       .addCase(getCategories.pending, (state, action) => {
         console.log(action);
-        state.loading = 'loading';
-        state.error = null;
+        state.categoriesLoading = true;
+        state.categoriesError = null;
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.loading = 'idle';
+        state.categoriesLoading = false;
         state.categories = action.payload;
       })
       .addCase(getCategories.rejected, (state, action) => {
-        state.loading = 'idle';
-        state.error = action.payload || action.error.message;
+        state.categoriesLoading = false;
+        state.categoriesError = true;
         console.log('rejected');
       });
   },

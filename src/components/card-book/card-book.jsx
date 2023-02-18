@@ -6,6 +6,8 @@ import { Rating } from '../rating/rating';
 
 import style from './card-book.module.scss';
 
+const HOST = 'https://strapi.cleverland.by';
+
 const Button = ({ isBooked, bookedTill, className }) => {
   let text = 'Забронировать';
 
@@ -23,10 +25,10 @@ const Button = ({ isBooked, bookedTill, className }) => {
   );
 };
 
-export const CardBook = ({ id, image, rating, title, author, year, isBooked, bookedTill, category, view }) => (
+export const CardBook = ({ id, image, rating, title, authors, issueYear, booking, bookedTill, categories, view }) => (
   <article className={cn(style.book, view === 'grid' ? style.bookGrid : style.bookList)}>
     {image ? (
-      <img src={image} className={style.img} alt={title} width={174} height={242} />
+      <img src={`${HOST}${image.url}`} className={style.img} alt={title} width={174} height={242} loading='lazy' />
     ) : (
       <NoImg classes={style.noImg} classesImg={style.noImgSvg} />
     )}
@@ -39,16 +41,16 @@ export const CardBook = ({ id, image, rating, title, author, year, isBooked, boo
         )}
       </div>
       <h3 className={style.title}>
-        <Link to={`/books/${category}/${id}`} className={style.titleText}>
+        <Link to={`/books/${categories[0]}/${id}`} className={style.titleText}>
           {title}
         </Link>
       </h3>
       <div className={style.author}>
         <span className={style.authorText}>
-          {author}, {year}
+          {authors.map((author) => author)}, {issueYear}
         </span>
       </div>
-      <Button className={style.btn} isBooked={isBooked} bookedTill={bookedTill} />
+      <Button className={style.btn} isBooked={booking} bookedTill={bookedTill} />
     </div>
   </article>
 );

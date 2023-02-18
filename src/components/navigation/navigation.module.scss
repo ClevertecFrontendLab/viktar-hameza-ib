@@ -150,33 +150,3 @@
     display: block;
   }
 }
-
-.listInnerItem {
-  margin-left: 20px;
-  padding: 8px 0;
-  &:last-child {
-    padding-bottom: 0;
-  }
-}
-
-.listInnerLink {
-  display: block;
-  font-size: 16px;
-  line-height: 24px;
-  &.active {
-    .listInnerLinkText {
-      font-weight: 700;
-      background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
-    }
-  }
-}
-
-.itemNumber {
-  font-size: 14px;
-  line-height: 24px;
-  color: var(--black-40);
-}
