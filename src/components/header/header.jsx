@@ -7,7 +7,7 @@ import avatar from '../../assets/img/avatar2.jpg';
 import iconClose from '../../assets/img/svg/icon-close-nav.svg';
 import iconMenu from '../../assets/img/svg/icon-menu.svg';
 import logo from '../../assets/img/svg/logo.svg';
-import { getPosts } from '../../redux/posts-slice';
+import { getCategories } from '../../redux/categories-slice';
 import { setFirstName } from '../../redux/user-slice';
 import { Navigation } from '../navigation/navigation';
 import { Loader } from '../loader/loader';
@@ -15,9 +15,9 @@ import { Loader } from '../loader/loader';
 import styles from './header.module.scss';
 
 export const Header = () => {
-  const dispatch = useDispatch();
-  const name = useSelector((state) => state.user.firstName);
-  const { posts, loading, error } = useSelector((state) => state.posts);
+  // const dispatch = useDispatch();
+  // const name = useSelector((state) => state.user.firstName);
+  // const { categories, loading, error } = useSelector((state) => state.categories);
 
   const [burgerActive, setBurgerActive] = useState(false);
   const burgerNav = useRef(null);
@@ -36,16 +36,16 @@ export const Header = () => {
     };
   }, []);
 
-  const fetchPost = () => {
-    dispatch(getPosts());
-  };
+  // const fetchPost = () => {
+  //   dispatch(getCategories());
+  // };
 
   // useEffect(() => {
-  //   dispatch(getPosts())
-  //     .unwrap()
-  //     .then(() => console.log('Все ок'))
-  //     .catch(() => console.log('Все плохо'));
-  //   console.log('loading');
+  //   dispatch(getCategories());
+  //   //   .unwrap()
+  //   //   .then(() => console.log('Все ок'))
+  //   //   .catch(() => console.log('Все плохо'));
+  //   // console.log('loading');
   // }, [dispatch]);
 
   return (

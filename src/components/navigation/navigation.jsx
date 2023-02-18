@@ -1,28 +1,13 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
+// import { getCategories } from '../../redux/categories-slice';
 import { IconArrow } from '../svg/icon-arrow';
 
 import style from './navigation.module.scss';
-
-const data = [
-  { name: 'Все книги', category: 'all' },
-  { name: 'Бизнес-книги', counter: 14, category: '1' },
-  { name: 'Детективы', counter: 8, category: '2' },
-  { name: 'Детские книги', counter: 14, category: '3' },
-  { name: 'Зарубежная литература', counter: 2, category: '4' },
-  { name: 'История', counter: 5, category: '5' },
-  { name: 'Классическая литература', counter: 12, category: '6' },
-  { name: 'Книги по психологии', counter: 11, category: '7' },
-  { name: 'Компьютерная литература', counter: 54, category: '8' },
-  { name: 'Культура и искусство', counter: 5, category: '9' },
-  { name: 'Наука и образование', counter: 2, category: '10' },
-  { name: 'Публицистическая литература', counter: 0, category: '11' },
-  { name: 'Справочники', counter: 10, category: '12' },
-  { name: 'Фантастика', counter: 12, category: '13' },
-  { name: 'Юмористическая литература', counter: 8, category: '14' },
-];
+import { SubItemLink } from './sub-item-link/sub-item-link';
 
 export const Navigation = ({
   className,
@@ -35,6 +20,8 @@ export const Navigation = ({
   refNav,
 }) => {
   const location = useLocation();
+
+  const { categories, error } = useSelector((state) => state.categories);
 
   const [isOpenBooks, setIsOpenBooks] = useState(true);
 
@@ -63,26 +50,16 @@ export const Navigation = ({
               data-test-id={testIdShowcase}
             >
               Витрина книг
-              <IconArrow className={style.iconArrow} />
+              {!error && <IconArrow className={style.iconArrow} />}
             </NavLink>
-
-            <ul className={style.listInner}>
-              {data.map(({ name, counter, category }) => (
-                <li key={name} className={style.listInnerItem}>
-                  <NavLink
-                    onClick={setBurgerActive ? () => setBurgerActive(false) : null}
-                    to={`/books/${category}`}
-                    className={({ isActive }) =>
-                      isActive ? cn(style.listInnerLink, style.active) : style.listInnerLink
-                    }
-                    data-test-id={category === 'all' ? testIdBooks : ''}
-                  >
-                    <span className={style.listInnerLinkText}>{name}</span>&nbsp;
-                    <span className={style.itemNumber}>{counter}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+            {!error && (
+              <ul className={style.listInner}>
+                <SubItemLink name='Все книги' path='all' testIdBooks={testIdBooks} setBurgerActive={setBurgerActive} />
+                {categories.map(({ id, name, path }) => (
+                  <SubItemLink key={id} id={id} name={name} path={path} setBurgerActive={setBurgerActive} />
+                ))}
+              </ul>
+            )}
           </li>
           <li className={style.listItem}>
             <NavLink to='/terms' className={listItemActive} onClick={handleClick} data-test-id={testIdTerms}>
