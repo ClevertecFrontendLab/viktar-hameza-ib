@@ -20,8 +20,7 @@ export const booksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getBooks.pending, (state, action) => {
-        console.log(action);
+      .addCase(getBooks.pending, (state) => {
         state.booksLoading = true;
         state.booksError = null;
       })
@@ -30,10 +29,9 @@ export const booksSlice = createSlice({
         state.booksLoading = false;
         state.books = action.payload;
       })
-      .addCase(getBooks.rejected, (state, action) => {
+      .addCase(getBooks.rejected, (state) => {
         state.booksLoading = false;
         state.booksError = true;
-        console.log('rejected');
       });
   },
   // {

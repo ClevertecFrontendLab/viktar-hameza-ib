@@ -2,31 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-// import { books } from '../../assets/data/books';
 import { CardBook } from '../../components/card-book/card-book';
 import { ControlPanel } from '../../components/control-panel/control-panel';
 import { Loader } from '../../components/loader/loader';
 import { Toast } from '../../components/toast/toast';
-import { getCategories } from '../../redux/categories-slice';
 import { getBooks } from '../../redux/books-slice';
+import { getCategories } from '../../redux/categories-slice';
 
 import styles from './main-page.module.scss';
 
 export const MainPage = () => {
   const [view, setView] = useState('grid');
-  const { categories, categoriesLoading, categoriesError } = useSelector((state) => state.categories);
   const { books, booksLoading, booksError } = useSelector((state) => state.books);
+  const { categories, categoriesLoading, categoriesError } = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!categories.length) {
-      dispatch(getCategories());
-      //   .unwrap()
-      //   .then(() => console.log('Все ок'))
-      //   .catch(() => console.log('Все плохо'));
-      // console.log('loading');
-    }
-  }, [dispatch, categories]);
 
   useEffect(() => {
     if (!books.length) {
@@ -34,20 +23,30 @@ export const MainPage = () => {
     }
   }, [dispatch, books]);
 
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(getCategories());
+    }
+  }, [dispatch, categories]);
+
   return (
     <React.Fragment>
-      <ControlPanel setView={setView} view={view} />
-      {categoriesLoading || (booksLoading && <Loader />)}
+      {/* {categoriesLoading || booksLoading ? <Loader /> : null} */}
       {categoriesError || booksError ? (
         <Toast />
+      ) : categoriesLoading || booksLoading ? (
+        <Loader />
       ) : (
-        <ul className={cn(styles.books, view === 'grid' ? styles.booksGrid : styles.booksList)}>
-          {books.map((book) => (
-            <li key={book.id} className={styles.listItem} data-test-id='card'>
-              <CardBook {...book} view={view} />
-            </li>
-          ))}
-        </ul>
+        <React.Fragment>
+          <ControlPanel setView={setView} view={view} />
+          <ul className={cn(styles.books, view === 'grid' ? styles.booksGrid : styles.booksList)}>
+            {books.map((book) => (
+              <li key={book.id} className={styles.listItem} data-test-id='card'>
+                <CardBook {...book} view={view} />
+              </li>
+            ))}
+          </ul>
+        </React.Fragment>
       )}
     </React.Fragment>
   );

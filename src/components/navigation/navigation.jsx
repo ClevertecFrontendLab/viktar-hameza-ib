@@ -22,6 +22,7 @@ export const Navigation = ({
   const location = useLocation();
 
   const { categories, categoriesError } = useSelector((state) => state.categories);
+  const { books, booksLoading, booksError } = useSelector((state) => state.books);
 
   const [isOpenBooks, setIsOpenBooks] = useState(true);
 
@@ -50,9 +51,9 @@ export const Navigation = ({
               data-test-id={testIdShowcase}
             >
               Витрина книг
-              {!categoriesError && <IconArrow className={style.iconArrow} />}
+              {!categoriesError && !booksError && <IconArrow className={style.iconArrow} />}
             </NavLink>
-            {!categoriesError && (
+            {!categoriesError && !booksError && !booksLoading && (
               <ul className={style.listInner}>
                 <SubItemLink name='Все книги' path='all' testIdBooks={testIdBooks} setBurgerActive={setBurgerActive} />
                 {categories.map(({ id, name, path }) => (
