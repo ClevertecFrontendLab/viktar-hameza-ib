@@ -32,14 +32,12 @@ export const categoriesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCategories.pending, (state, action) => {
-        console.log(action);
         state.categoriesLoading = true;
         state.categoriesError = null;
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.categoriesLoading = false;
         state.categories = action.payload;
-        console.log(action.payload);
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.categoriesLoading = false;
