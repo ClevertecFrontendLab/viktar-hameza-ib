@@ -25,7 +25,6 @@ export const booksSlice = createSlice({
         state.booksError = null;
       })
       .addCase(getBooks.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.booksLoading = false;
         state.books = action.payload;
       })
@@ -34,11 +33,6 @@ export const booksSlice = createSlice({
         state.booksError = true;
       });
   },
-  // {
-  //   [getPosts.fulfilled]: () => console.log('fulfilled'),
-  //   [getPosts.pending]: () => console.log('pending'),
-  //   [getPosts.rejected]: () => console.log('rejected'),
-  // },
 });
 
 export const booksReducer = booksSlice.reducer;

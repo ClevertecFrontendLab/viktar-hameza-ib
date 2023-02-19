@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// https://jsonplaceholder.typicode.com/posts
 const initialState = {
   categories: [],
   categoriesLoading: false,
@@ -38,21 +37,15 @@ export const categoriesSlice = createSlice({
         state.categoriesError = null;
       })
       .addCase(getCategories.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.categoriesLoading = false;
         state.categories = action.payload;
+        console.log(action.payload);
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.categoriesLoading = false;
         state.categoriesError = true;
-        console.log('rejected');
       });
   },
-  // {
-  //   [getPosts.fulfilled]: () => console.log('fulfilled'),
-  //   [getPosts.pending]: () => console.log('pending'),
-  //   [getPosts.rejected]: () => console.log('rejected'),
-  // },
 });
 
 export const categoriesReducer = categoriesSlice.reducer;

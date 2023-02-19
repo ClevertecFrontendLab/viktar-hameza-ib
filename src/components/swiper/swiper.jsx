@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import bookImg from '../../assets/img/book.jpg';
+import { HOST } from '../../consts/host';
 
 import './swiper.scss';
 
@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export const Slider = () => {
+export const Slider = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -27,10 +27,10 @@ export const Slider = () => {
           clickable: true,
         }}
       >
-        {[...Array(5)].map((_, i) => (
+        {images.map((item, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={i}>
-            <img src={bookImg} alt='' />
+            <img src={`${HOST}${item.url}`} alt='' />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -48,10 +48,10 @@ export const Slider = () => {
         centeredSlidesBounds={true}
         modules={[FreeMode, Navigation, Thumbs, Pagination]}
       >
-        {[...Array(5)].map((_, i) => (
+        {images.map((item, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <SwiperSlide data-test-id='slide-mini' key={i}>
-            <img src={bookImg} alt='' />
+          <SwiperSlide key={i} data-test-id='slide-mini'>
+            <img src={`${HOST}${item.url}`} alt='' />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -8,7 +8,7 @@ import iconClose from '../../assets/img/svg/icon-close-nav.svg';
 import iconMenu from '../../assets/img/svg/icon-menu.svg';
 import logo from '../../assets/img/svg/logo.svg';
 import { getCategories } from '../../redux/categories-slice';
-import { setFirstName } from '../../redux/user-slice';
+import { setFirstName } from '../../redux/book-slice';
 import { Navigation } from '../navigation/navigation';
 import { Loader } from '../loader/loader';
 

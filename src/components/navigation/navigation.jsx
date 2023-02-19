@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
-// import { getCategories } from '../../redux/categories-slice';
 import { IconArrow } from '../svg/icon-arrow';
 
-import style from './navigation.module.scss';
 import { SubItemLink } from './sub-item-link/sub-item-link';
+
+import style from './navigation.module.scss';
 
 export const Navigation = ({
   className,
@@ -51,7 +51,7 @@ export const Navigation = ({
               data-test-id={testIdShowcase}
             >
               Витрина книг
-              {!categoriesError && !booksError && <IconArrow className={style.iconArrow} />}
+              {!categoriesError && !booksError && !booksLoading && <IconArrow className={style.iconArrow} />}
             </NavLink>
             {!categoriesError && !booksError && !booksLoading && (
               <ul className={style.listInner}>

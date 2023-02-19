@@ -30,8 +30,8 @@ export const MainPage = () => {
   }, [dispatch, categories]);
 
   return (
+    // eslint-disable-next-line
     <React.Fragment>
-      {/* {categoriesLoading || booksLoading ? <Loader /> : null} */}
       {categoriesError || booksError ? (
         <Toast />
       ) : categoriesLoading || booksLoading ? (
