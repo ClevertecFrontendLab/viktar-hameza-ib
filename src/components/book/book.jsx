@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import iconArrow from '../../assets/img/svg/icon-arrow-re.svg';
 import userReviewImg from '../../assets/img/user-review.jpg';
-import { HOST } from '../../consts/host';
+import { BASE_URL } from '../../consts/host';
 import { NoImg } from '../no-img/no-img';
 import { Rating } from '../rating/rating';
 import { Slider } from '../swiper/swiper';
@@ -58,7 +58,12 @@ export const Book = ({
             ) : images.length >= 2 ? (
               <Slider images={images} />
             ) : (
-              <img className={style.booImgOne} src={`${HOST}${images[0].url}`} alt='book' data-test-id='slide-big' />
+              <img
+                className={style.booImgOne}
+                src={`${BASE_URL}${images[0].url}`}
+                alt='book'
+                data-test-id='slide-big'
+              />
             )}
           </div>
 
@@ -117,25 +122,33 @@ export const Book = ({
           </h2>
 
           <ul className={style.reviewsList}>
-            {comments?.map(({ id, user, createdAt, text, rating: ratingUser }) => (
-              <li key={id} className={style.reviewsItem}>
-                <div className={style.reviewHeader}>
-                  <img src={userReviewImg} alt='' className={style.reviewImg} width={32} height={32} />
-                  <span className={style.reviewName}>
-                    {user.firstName} {user.lastName}
-                  </span>
-                  <span className={style.reviewDate}>{createdAt}</span>
-                </div>
-                <div className={style.reviewsStars}>
-                  <Rating rating={ratingUser} />
-                </div>
-                {text && (
-                  <div className={style.reviewsBody}>
-                    <p>{text}</p>
+            {comments?.map(({ id, user, createdAt, text, rating: ratingUser }) => {
+              const data = new Date(createdAt).toLocaleDateString('ru-RU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              });
+
+              return (
+                <li key={id} className={style.reviewsItem}>
+                  <div className={style.reviewHeader}>
+                    <img src={userReviewImg} alt='' className={style.reviewImg} width={32} height={32} />
+                    <span className={style.reviewName}>
+                      {user.firstName} {user.lastName}
+                    </span>
+                    <span className={style.reviewDate}>{data}</span>
                   </div>
-                )}
-              </li>
-            ))}
+                  <div className={style.reviewsStars}>
+                    <Rating rating={ratingUser} />
+                  </div>
+                  {text && (
+                    <div className={style.reviewsBody}>
+                      <p>{text}</p>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           <button type='button' className={style.reviewsBtn} data-test-id='button-rating'>

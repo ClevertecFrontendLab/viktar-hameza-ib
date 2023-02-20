@@ -15,11 +15,9 @@ export const Breadcrumbs = ({ title = '' }) => {
       <div className='container'>
         <ul className={style.list}>
           <li className={style.item}>
-            {categories.length ? (
-              <Link to={`/books/${category}`} className={style.link}>
-                {currentCategory ? currentCategory.name : 'Все книги'}
-              </Link>
-            ) : null}
+            <Link to={`/books/${category}`} className={style.link}>
+              {categories.length ? (currentCategory ? currentCategory.name : 'Все книги') : 'Все книги'}
+            </Link>
           </li>
           <li className={style.item}>
             <span className={style.link}>{title}</span>

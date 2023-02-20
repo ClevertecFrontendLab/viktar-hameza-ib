@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { HOST } from '../../consts/host';
+import { BASE_URL } from '../../consts/host';
 
 import './swiper.scss';
 
@@ -30,7 +30,7 @@ export const Slider = ({ images }) => {
         {images.map((item, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={i}>
-            <img src={`${HOST}${item.url}`} alt='' />
+            <img src={`${BASE_URL}${item.url}`} alt='' />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -51,7 +51,7 @@ export const Slider = ({ images }) => {
         {images.map((item, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={i} data-test-id='slide-mini'>
-            <img src={`${HOST}${item.url}`} alt='' />
+            <img src={`${BASE_URL}${item.url}`} alt='' />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { URL_API } from '../consts/host';
+
 const initialState = {
   categories: [],
   categoriesLoading: false,
@@ -10,7 +12,7 @@ const initialState = {
 export const getCategories = createAsyncThunk(
   'categories/getCategories',
   async () => {
-    const res = await fetch('https://strapi.cleverland.by/api/categories');
+    const res = await fetch(`${URL_API}/categories`);
     const data = await res.json();
 
     return data;

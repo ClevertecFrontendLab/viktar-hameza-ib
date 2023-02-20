@@ -1,12 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
+import { BASE_URL } from '../../consts/host';
 import { NoImg } from '../no-img/no-img';
 import { Rating } from '../rating/rating';
 
 import style from './card-book.module.scss';
-
-const HOST = 'https://strapi.cleverland.by';
 
 const Button = ({ isBooked, bookedTill, className }) => {
   let text = 'Забронировать';
@@ -31,7 +30,14 @@ export const CardBook = ({ id, image, rating, title, authors, issueYear, booking
   return (
     <article className={cn(style.book, view === 'grid' ? style.bookGrid : style.bookList)}>
       {image ? (
-        <img src={`${HOST}${image.url}`} className={style.img} alt={title} width={174} height={242} loading='lazy' />
+        <img
+          src={`${BASE_URL}${image.url}`}
+          className={style.img}
+          alt={title}
+          width={174}
+          height={242}
+          loading='lazy'
+        />
       ) : (
         <NoImg classes={style.noImg} classesImg={style.noImgSvg} />
       )}
