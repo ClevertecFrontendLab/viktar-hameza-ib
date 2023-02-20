@@ -1,0 +1,94 @@
+@use '../../assets/styles/mixins' as mixin;
+
+.header {
+  .headerNav {
+    display: none;
+  }
+  &.navActiv {
+    .headerNav {
+      display: block;
+      @media (min-width: 1001px) {
+        display: none;
+      }
+    }
+  }
+  &Logo {
+    margin-right: 120px;
+  }
+}
+.headerNav {
+  @media (min-width: 1001px) {
+    display: none;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  min-height: mixin.rem(58px);
+  padding-top: 32px;
+  padding-bottom: 15px;
+  @media (max-width: 600px) {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+.logo {
+  display: block;
+  width: 165px;
+  height: 40px;
+  @media (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.siteName {
+  font-size: mixin.rem(32px);
+  line-height: mixin.lh(32px, 48px);
+  font-weight: 700;
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.userAccount {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+  @media (max-width: 770px) {
+    display: none;
+  }
+}
+
+.userAccountText {
+  font-weight: 600;
+  font-size: mixin.rem(14px);
+  line-height: mixin.lh(14px, 18px);
+}
+
+.userAccountImg {
+  object-fit: cover;
+  filter: drop-shadow(0px 2px 4px rgba(191, 196, 201, 0.2)) drop-shadow(0px 3px 4px rgba(191, 196, 201, 0.18))
+    drop-shadow(0px 1px 5px rgba(191, 196, 201, 0.24));
+  border-radius: 150px;
+  &:hover {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  transition: 0.2s all ease-in;
+}
+
+.btnMenu {
+  margin-right: 24px;
+  background: #fff;
+  border: 0;
+  @media (min-width: 1001px) {
+    display: none;
+  }
+  @media (max-width: 600px) {
+    width: 24px;
+  }
+}
