@@ -17,6 +17,8 @@ export const Navigation = ({
   testIdBooks,
   testIdTerms,
   testIdContract,
+  testIdAll,
+  testIdSubItem,
   refNav,
 }) => {
   const location = useLocation();
@@ -44,9 +46,9 @@ export const Navigation = ({
       <nav className={isOpenBooks && location.pathname.includes('/books') ? cn(style.nav, style.openBooks) : style.nav}>
         <ul className={style.list}>
           <li className={style.listItem}>
-            <button
+            <NavLink
               type='button'
-              // to='/books/all'
+              to='/books/all'
               onClick={() => setIsOpenBooks(!isOpenBooks)}
               className={
                 location.pathname.includes('/books') ? cn(style.listItemLink, style.isActive) : style.listItemLink
@@ -55,10 +57,16 @@ export const Navigation = ({
             >
               Витрина книг
               {!categoriesError && !booksError && !booksLoading && <IconArrow className={style.iconArrow} />}
-            </button>
+            </NavLink>
             {!categoriesError && !booksError && !booksLoading && (
               <ul className={style.listInner}>
-                <SubItemLink name='Все книги' path='all' testIdBooks={testIdBooks} setBurgerActive={setBurgerActive} />
+                <SubItemLink
+                  name='Все книги'
+                  path='all'
+                  testIdBooks={testIdBooks}
+                  setBurgerActive={setBurgerActive}
+                  testId={testIdAll}
+                />
                 {categories.map(({ id, name, path }) => (
                   <SubItemLink
                     key={id}
@@ -67,6 +75,8 @@ export const Navigation = ({
                     path={path}
                     setBurgerActive={setBurgerActive}
                     counter={booksCounter(name)}
+                    testId={`${testIdSubItem}-${path}`}
+                    testIdCount={`${testIdSubItem}-book-count-for-${path}`}
                   />
                 ))}
               </ul>

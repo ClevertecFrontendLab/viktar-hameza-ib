@@ -17,6 +17,7 @@ export const MainPage = () => {
   const dispatch = useDispatch();
   const { category } = useParams();
   const [sorting, setSorting] = useState('true');
+  const [search, setSearch] = useState('');
 
   const [view, setView] = useState('grid');
   const { categories, categoriesLoading, categoriesError } = useSelector((state) => state.categories);
@@ -39,11 +40,11 @@ export const MainPage = () => {
     return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   };
 
+  const searchFiltering = (arr, text) => arr.filter((el) => el.title.toLowerCase().includes(text.toLowerCase()));
+
   useEffect(() => {
-    if (!books.length) {
-      dispatch(getBooks());
-    }
-  }, [dispatch, books]);
+    dispatch(getBooks());
+  }, [dispatch]);
 
   useEffect(() => {
     if (!categories.length) {
@@ -60,13 +61,23 @@ export const MainPage = () => {
         <Loader />
       ) : (
         <React.Fragment>
-          <ControlPanel setView={setView} view={view} setSortingDES={setSorting} sortingDES={sorting} />
+          <ControlPanel
+            setView={setView}
+            view={view}
+            setSortingDES={setSorting}
+            sortingDES={sorting}
+            setSearch={setSearch}
+            search={search}
+          />
 
-          {!filterBooks.length && <NotFound>В этой категории книг ещё нет</NotFound>}
+          {!filterBooks.length && <NotFound dataTestId='empty-category'>В этой категории книг ещё нет</NotFound>}
+          {!!filterBooks.length && !searchFiltering(onSorting(filterBooks, sorting), search).length && (
+            <NotFound dataTestId='search-result-not-found'>По запросу ничего не найдено</NotFound>
+          )}
           <ul className={cn(styles.books, view === 'grid' ? styles.booksGrid : styles.booksList)}>
-            {onSorting(filterBooks, sorting).map((book) => (
+            {searchFiltering(onSorting(filterBooks, sorting), search).map((book) => (
               <li key={book.id} className={styles.listItem} data-test-id='card'>
-                <CardBook {...book} view={view} />
+                <CardBook {...book} view={view} search={search} />
               </li>
             ))}
           </ul>
