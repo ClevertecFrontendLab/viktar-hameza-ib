@@ -79,6 +79,8 @@ button {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   flex: 1 1 auto;
 }
 
@@ -94,10 +96,12 @@ main {
 
 .container {
   max-width: 1190px;
+  width: 100%;
   padding-left: 40px;
   padding-right: 40px;
   margin-left: auto;
   margin-right: auto;
+  flex: 1;
 
   @media (max-width: 640px) {
     padding-left: 20px;

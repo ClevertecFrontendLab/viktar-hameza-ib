@@ -9,6 +9,7 @@ export const Breadcrumbs = ({ title = '' }) => {
   const { categories } = useSelector((state) => state.categories);
 
   const currentCategory = categories.find(({ path }) => path === category);
+  console.log(currentCategory);
 
   return (
     <nav className={style.breadcrumbs} aria-label='Breadcrumb'>

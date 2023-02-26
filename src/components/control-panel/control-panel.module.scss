@@ -116,6 +116,11 @@
     }
   }
 }
+.btnSortASC {
+  &::before {
+    transform: scale(1, -1);
+  }
+}
 .btnSortText {
   @media (max-width: 600px) {
     display: none;

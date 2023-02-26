@@ -7,7 +7,7 @@ import { IconViewList } from '../svg/view-mod/icon-view-list';
 
 import style from './control-panel.module.scss';
 
-export const ControlPanel = ({ view, setView }) => {
+export const ControlPanel = ({ view, setView, setSortingDES, sortingDES }) => {
   const [isSearchActive, setSearchActive] = useState(false);
 
   const searchRef = useRef(null);
@@ -43,7 +43,11 @@ export const ControlPanel = ({ view, setView }) => {
           <img src={iconClose} alt='' />
         </button>
       </div>
-      <button type='button' className={style.btnSort}>
+      <button
+        type='button'
+        className={cn(style.btnSort, { [style.btnSortASC]: !sortingDES })}
+        onClick={() => setSortingDES(!sortingDES)}
+      >
         <span className={style.btnSortText}>По рейтингу</span>
       </button>
       <div className={style.viewMode}>

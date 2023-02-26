@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import style from './sub-item-link.module.scss';
 
-export const SubItemLink = ({ id, path, name, setBurgerActive, testIdBooks }) => (
+export const SubItemLink = ({ id, path, name, setBurgerActive, testIdBooks, counter }) => (
   <li className={style.listInnerItem}>
     <NavLink
       onClick={setBurgerActive ? () => setBurgerActive(false) : null}
@@ -12,7 +12,7 @@ export const SubItemLink = ({ id, path, name, setBurgerActive, testIdBooks }) =>
       data-test-id={path === 'all' ? testIdBooks : ''}
     >
       <span className={style.listInnerLinkText}>{name}</span>&nbsp;
-      <span className={style.itemNumber}>{id}</span>
+      <span className={style.itemNumber}>{counter}</span>
     </NavLink>
   </li>
 );
