@@ -17,6 +17,8 @@ export const Navigation = ({
   testIdBooks,
   testIdTerms,
   testIdContract,
+  testIdAll,
+  testIdSubItem,
   refNav,
 }) => {
   const location = useLocation();
@@ -37,12 +39,15 @@ export const Navigation = ({
 
   const listItemActive = ({ isActive }) => cn(style.listItemLink, isActive && style.isActive);
 
+  const booksCounter = (category) => books.filter((el) => el.categories.includes(category)).length;
+
   return (
     <div className={cn(style.navigation, className)} data-test-id={testIdNav} ref={refNav}>
       <nav className={isOpenBooks && location.pathname.includes('/books') ? cn(style.nav, style.openBooks) : style.nav}>
         <ul className={style.list}>
           <li className={style.listItem}>
             <NavLink
+              type='button'
               to='/books/all'
               onClick={() => setIsOpenBooks(!isOpenBooks)}
               className={
@@ -55,9 +60,24 @@ export const Navigation = ({
             </NavLink>
             {!categoriesError && !booksError && !booksLoading && (
               <ul className={style.listInner}>
-                <SubItemLink name='Все книги' path='all' testIdBooks={testIdBooks} setBurgerActive={setBurgerActive} />
+                <SubItemLink
+                  name='Все книги'
+                  path='all'
+                  testIdBooks={testIdBooks}
+                  setBurgerActive={setBurgerActive}
+                  testId={testIdAll}
+                />
                 {categories.map(({ id, name, path }) => (
-                  <SubItemLink key={id} id={id} name={name} path={path} setBurgerActive={setBurgerActive} />
+                  <SubItemLink
+                    key={id}
+                    id={id}
+                    name={name}
+                    path={path}
+                    setBurgerActive={setBurgerActive}
+                    counter={booksCounter(name)}
+                    testId={`${testIdSubItem}-${path}`}
+                    testIdCount={`${testIdSubItem}-book-count-for-${path}`}
+                  />
                 ))}
               </ul>
             )}

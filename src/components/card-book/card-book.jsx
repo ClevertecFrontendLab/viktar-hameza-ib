@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import Highlighter from 'react-highlight-words';
 import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -6,6 +8,12 @@ import { NoImg } from '../no-img/no-img';
 import { Rating } from '../rating/rating';
 
 import style from './card-book.module.scss';
+
+const Highlight = ({ children }) => (
+  <mark data-test-id='highlight-matches' className={style.highlightClass}>
+    {children}
+  </mark>
+);
 
 const Button = ({ isBooked, bookedTill, className }) => {
   let text = 'Забронировать';
@@ -24,7 +32,7 @@ const Button = ({ isBooked, bookedTill, className }) => {
   );
 };
 
-export const CardBook = ({ id, image, rating, title, authors, issueYear, booking, bookedTill, view }) => {
+export const CardBook = ({ id, image, rating, title, authors, issueYear, booking, bookedTill, view, search }) => {
   const { pathname } = useLocation();
 
   return (
@@ -51,7 +59,7 @@ export const CardBook = ({ id, image, rating, title, authors, issueYear, booking
         </div>
         <h3 className={style.title}>
           <Link to={`${pathname}/${id}`} className={style.titleText}>
-            {title}
+            <Highlighter searchWords={[search]} autoEscape={true} textToHighlight={title} highlightTag={Highlight} />
           </Link>
         </h3>
         <div className={style.author}>

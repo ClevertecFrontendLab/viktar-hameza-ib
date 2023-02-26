@@ -3,16 +3,20 @@ import cn from 'classnames';
 
 import style from './sub-item-link.module.scss';
 
-export const SubItemLink = ({ id, path, name, setBurgerActive, testIdBooks }) => (
+export const SubItemLink = ({ id, path, name, setBurgerActive, counter, testId, testIdCount }) => (
   <li className={style.listInnerItem}>
     <NavLink
       onClick={setBurgerActive ? () => setBurgerActive(false) : null}
       to={`/books/${path}`}
       className={({ isActive }) => (isActive ? cn(style.listInnerLink, style.active) : style.listInnerLink)}
-      data-test-id={path === 'all' ? testIdBooks : ''}
     >
-      <span className={style.listInnerLinkText}>{name}</span>&nbsp;
-      <span className={style.itemNumber}>{id}</span>
+      <span className={style.listInnerLinkText} data-test-id={testId}>
+        {name}
+      </span>
+      &nbsp;
+      <span className={style.itemNumber} data-test-id={testIdCount}>
+        {counter}
+      </span>
     </NavLink>
   </li>
 );

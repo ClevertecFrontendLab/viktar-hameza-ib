@@ -19,38 +19,44 @@
   padding: 10px 20px 10px 40px;
   height: 38px;
   font-size: 14px;
-  color: var(--black-40);
+  color: #363636;
   line-height: 18px;
   border-radius: 50px;
   border: 0;
   box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
     0px 1px 5px rgba(191, 196, 201, 0.24);
   &::placeholder {
-    color: var(--black-40);
+    color: #a7a7a7;
+    opacity: 1;
   }
-  color: red;
+  caret-color: #f83600;
   @media (max-width: 1000px) {
     min-width: 274px;
   }
   &:focus-visible {
     outline: 0;
   }
+  &:focus + .iconSearch {
+    svg {
+      fill: #f8610a;
+    }
+  }
 }
 
 .label {
   position: relative;
-  &::before {
-    content: '';
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    margin-top: -8px;
-    width: 16px;
-    height: 16px;
-    background-image: url('../../assets/img/svg/icon-search.svg');
-    background-repeat: no-repeat;
-    z-index: 1;
-  }
+}
+.iconSearch {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  margin-top: -8px;
+  width: 16px;
+  height: 16px;
+  background-image: url('../../assets/img/svg/icon-search.svg');
+  background-repeat: no-repeat;
+  z-index: 1;
 }
 
 .viewMode {
@@ -116,6 +122,11 @@
     }
   }
 }
+.btnSortASC {
+  &::before {
+    transform: scale(1, -1);
+  }
+}
 .btnSortText {
   @media (max-width: 600px) {
     display: none;
@@ -172,10 +183,8 @@
       padding-right: 0;
       opacity: 1;
     }
-    .label {
-      &::before {
-        display: none;
-      }
+    .iconSearch {
+      display: none;
     }
     .inputSearch {
       width: 100%;

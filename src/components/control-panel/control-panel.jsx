@@ -2,13 +2,15 @@ import { useRef, useState } from 'react';
 import cn from 'classnames';
 
 import iconClose from '../../assets/img/svg/icon-close.svg';
+import { IconSearch } from '../svg/icom-search';
 import { IconViewGrid } from '../svg/view-mod/icon-view-grid';
 import { IconViewList } from '../svg/view-mod/icon-view-list';
 
 import style from './control-panel.module.scss';
 
-export const ControlPanel = ({ view, setView }) => {
+export const ControlPanel = ({ view, setView, setSortingDES, sortingDES, setSearch, search }) => {
   const [isSearchActive, setSearchActive] = useState(false);
+  const [value, setValue] = useState('');
 
   const searchRef = useRef(null);
 
@@ -16,6 +18,11 @@ export const ControlPanel = ({ view, setView }) => {
     setSearchActive(!isSearchActive);
 
     searchRef.current.focus();
+  };
+
+  const onSearch = (e) => {
+    setValue(e.target.value);
+    setSearch(e.target.value);
   };
 
   return (
@@ -28,11 +35,16 @@ export const ControlPanel = ({ view, setView }) => {
         <label className={style.label}>
           <input
             type='text'
+            value={value}
+            onChange={onSearch}
             ref={searchRef}
             className={style.inputSearch}
-            placeholder='Поиск книги или автор...'
+            placeholder='Поиск книги или автора…'
             data-test-id='input-search'
           />
+          <span className={style.iconSearch}>
+            <IconSearch />
+          </span>
         </label>
         <button
           onClick={() => setSearchActive(!isSearchActive)}
@@ -43,13 +55,18 @@ export const ControlPanel = ({ view, setView }) => {
           <img src={iconClose} alt='' />
         </button>
       </div>
-      <button type='button' className={style.btnSort}>
+      <button
+        data-test-id='sort-rating-button'
+        type='button'
+        className={cn(style.btnSort, { [style.btnSortASC]: !sortingDES })}
+        onClick={() => setSortingDES(!sortingDES)}
+      >
         <span className={style.btnSortText}>По рейтингу</span>
       </button>
       <div className={style.viewMode}>
         <button
           onClick={() => setView('grid')}
-          className={cn(style.btnViewMode, style.btnGrid, view === 'grid' ? style.btnActive : null)}
+          className={cn(style.btnViewMode, style.btnGrid, { [style.btnActive]: view === 'grid' })}
           type='button'
           data-test-id='button-menu-view-window'
         >
@@ -58,7 +75,7 @@ export const ControlPanel = ({ view, setView }) => {
         </button>
         <button
           onClick={() => setView('list')}
-          className={cn(style.btnViewMode, style.btnList, view === 'list' ? style.btnActive : null)}
+          className={cn(style.btnViewMode, style.btnList, { [style.btnActive]: view === 'list' })}
           type='button'
           data-test-id='button-menu-view-list'
         >

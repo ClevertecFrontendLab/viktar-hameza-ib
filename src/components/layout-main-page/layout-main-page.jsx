@@ -14,6 +14,8 @@ export const LayoutMainPage = () => (
         testIdBooks='navigation-books'
         testIdTerms='navigation-terms'
         testIdContract='navigation-contract'
+        testIdAll='navigation-books'
+        testIdSubItem='navigation'
       />
     </div>
     <div className={style.content}>

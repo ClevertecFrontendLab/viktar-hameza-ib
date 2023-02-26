@@ -67,7 +67,9 @@ export const Book = ({
             )}
           </div>
 
-          <h1 className={style.heading}>{title}</h1>
+          <h1 className={style.heading} data-test-id='book-title'>
+            {title}
+          </h1>
           <span className={style.author}>
             {authors.map((author) => author)}, {issueYear}
           </span>

@@ -48,6 +48,8 @@ export const Header = () => {
           testIdBooks='burger-books'
           testIdTerms='burger-terms'
           testIdContract='burger-contract'
+          testIdAll='burger-books'
+          testIdSubItem='burger'
           refNav={burgerNav}
         />
 
