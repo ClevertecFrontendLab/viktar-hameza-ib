@@ -1,9 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-import { params } from '../api/api';
-import { URL_API } from '../consts/host';
+import { api } from '../api/api';
+import { API_URL } from '../consts/host';
 
 const initialState = {
   book: null,
@@ -12,7 +11,7 @@ const initialState = {
 };
 
 export const getBook = createAsyncThunk('books/getbook', async (bookId) => {
-  const { data } = await axios.get(`${URL_API}/books/${bookId}`, params);
+  const { data } = await api.get(`${API_URL.BOOKS}/${bookId}`);
 
   return data;
 });

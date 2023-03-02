@@ -1,16 +1,24 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import { Footer } from '../footer/footer';
 import { Header } from '../header/header';
 
-export const Layout = () => (
-  <React.Fragment>
-    <Header />
-    <main>
-      <Outlet />
-    </main>
+export const Layout = () => {
+  const auth = localStorage.getItem('token');
 
-    <Footer />
-  </React.Fragment>
-);
+  if (!auth) {
+    return <Navigate to='/auth' />;
+  }
+
+  return (
+    <React.Fragment>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+
+      <Footer />
+    </React.Fragment>
+  );
+};

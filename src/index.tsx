@@ -6,7 +6,9 @@ import { Layout } from './components/layout/layout';
 import { LayoutMainPage } from './components/layout-main-page/layout-main-page';
 import { BookPage } from './pages/book';
 import { ContentText } from './pages/content-text/content-text';
+import { Login } from './pages/login/login';
 import { MainPage } from './pages/main';
+import { Registration } from './pages/registration/registration';
 import { store } from './redux/store';
 
 import './index.scss';
@@ -26,6 +28,8 @@ root.render(
           </Route>
           <Route path='/books/:category/:bookId' element={<BookPage />} />
         </Route>
+        <Route path='/registration' element={<Registration />} />
+        <Route path='/auth' element={<Login />} />
       </Routes>
     </HashRouter>
   </Provider>

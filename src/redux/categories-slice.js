@@ -1,9 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-import { params } from '../api/api';
-import { URL_API } from '../consts/host';
+import { api } from '../api/api';
+import { API_URL } from '../consts/host';
 
 const initialState = {
   categories: [],
@@ -14,7 +13,7 @@ const initialState = {
 export const getCategories = createAsyncThunk(
   'categories/getCategories',
   async () => {
-    const { data } = await axios.get(`${URL_API}/categories`, params);
+    const { data } = await api.get(API_URL.CATEGORIES);
 
     return data;
   },

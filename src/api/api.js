@@ -1,9 +1,18 @@
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzEsImlhdCI6MTY3NzUxMjUzOCwiZXhwIjoxNjgwMTA0NTM4fQ.dNJ1HbUNMuVyEgf_fEyj_KHPkkvho1yqEnkFI8FcCL4';
+import axios from 'axios';
 
-export const params = {
-  headers: {
-    Authorization: `Bearer ${token}`,
-    Accept: 'application/json, text/plain, */*',
-  },
-};
+export const api = axios.create({
+  withCredentials: true,
+  // baseURL: BASE_URL,
+});
+
+api.interceptors.request.use((config) => {
+  const apiConfig = config;
+  const token = localStorage.getItem('token');
+  console.log(token);
+
+  if (token) {
+    apiConfig.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
